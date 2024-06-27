@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  min-height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  color: white;
+  background-image: linear-gradient(
+    to right bottom,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
+}
+
+.search-title {
+  @apply text-5xl text-center py-10 font-bold text-white;
+  text-shadow: 3px 3px 3px rgb(65, 65, 65);
+
+  &:after {
+    @apply bg-no-repeat w-12 h-12  inline-block;
+    content: "";
+    background: url("/record-icon.png");
+    background-size: contain;
+    transform: translate(50%, 10%);
+  }
+}
