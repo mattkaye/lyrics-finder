@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { LyricsJSON } from "./types";
+import { formatLyrics } from "./lib/FormatLyrics";
 import { SearchField } from "./components/SearchField";
 import SearchLyrics from "./lib/SearchLyrics";
 
@@ -37,7 +38,12 @@ function App() {
           />
         </form>
       </nav>
-      <main>{Object.values(lyricData)}</main>
+      <main>
+        <section className="w-full mx-auto text-center py-10 flex flex-col gap-1">
+          {lyricData.lyrics && formatLyrics(lyricData.lyrics)}
+          {lyricData.error}
+        </section>
+      </main>
     </div>
   );
 }
