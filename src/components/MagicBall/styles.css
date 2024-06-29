@@ -1,0 +1,11 @@
+.magic-ball-wrapper {
+  @apply fixed flex flex-col justify-center items-center right-0 top-1/2 w-60 h-24 bg-blue-500 rounded-xl transition-all translate-x-[90%] ease-in-out duration-300 shadow-xl;
+
+  &.active {
+    transform: translateX(5%);
+  }
+
+  button.interpret {
+    @apply bg-slate-200 text-black px-4 py-2 rounded-lg transition-colors hover:bg-slate-500 hover:text-white;
+  }
+}

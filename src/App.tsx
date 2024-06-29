@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
 import { LyricsJSON } from "./types";
-import { formatLyrics } from "./lib/FormatLyrics";
-import { SearchField } from "./components/SearchField";
-import SearchLyrics from "./lib/SearchLyrics";
 import { TextGenerateEffect } from "./components/ui/TextGenerateEffect";
+import { SearchField } from "./components/SearchField";
+import { InterpretLyrics } from "./components/MagicBall/InterpretLyrics";
 import { Loading } from "./components/Loading/Loading";
+import { formatLyrics } from "./lib/FormatLyrics";
+import SearchLyrics from "./lib/SearchLyrics";
 
 function App() {
   const form = useRef<HTMLFormElement>(null);
@@ -69,6 +70,7 @@ function App() {
             <span className="text-4xl">{lyricData.error} ☹️</span>
           )}
         </section>
+        <InterpretLyrics />
       </main>
     </div>
   );
