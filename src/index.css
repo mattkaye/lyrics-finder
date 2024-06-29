@@ -24,14 +24,15 @@ body {
 }
 
 .search-title {
-  @apply text-5xl text-center py-10 font-bold text-white;
+  @apply text-5xl py-10 font-bold text-white flex justify-center;
   text-shadow: 3px 3px 3px rgb(65, 65, 65);
 
   &:after {
-    @apply bg-no-repeat w-12 h-12  inline-block;
+    @apply w-12 h-12  inline-block;
     content: "";
     background: url("/record-icon.png");
     background-size: contain;
+    background-repeat: no-repeat;
     transform: translate(50%, 10%);
   }
 }

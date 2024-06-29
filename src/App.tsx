@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { LyricsJSON } from "./types";
 import { formatLyrics } from "./lib/FormatLyrics";
 import { SearchField } from "./components/SearchField";
 import SearchLyrics from "./lib/SearchLyrics";
+import { TextGenerateEffect } from "./components/ui/TextGenerateEffect";
+import { Loading } from "./components/Loading/Loading";
 
 function App() {
+  const form = useRef<HTMLFormElement>(null);
   const [isLoading, setLoading] = useState(false);
   const [lyricData, setLyrics] = useState<LyricsJSON>({
     lyrics: "",
@@ -14,8 +17,8 @@ function App() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
+    setLyrics({ lyrics: "", error: "" });
+    const formData = new FormData(form.current!);
     const [artist, song] = Array.from(formData.entries()).map(
       (value) => value[1] as string
     );
@@ -24,25 +27,32 @@ function App() {
     setLoading(false);
     setLyrics(data);
   };
+
   return (
     <div className="container mx-auto p-6">
       <nav>
-        <h1 className="search-title">Search For Lyrics</h1>
-        <form onSubmit={handleSubmit} className="flex w-full mx-auto gap-6">
+        <h1 className="search-title">
+          <TextGenerateEffect words={"Search For Song Lyrics"} />
+        </h1>
+        <form
+          ref={form}
+          onSubmit={handleSubmit}
+          className="flex w-full mx-auto gap-6"
+        >
           <SearchField
-            classes="border-slate-300 rounded-xl p-4 border-2 w-full text-2xl text-black"
+            classes="rounded-xl p-4 w-full text-2xl text-black"
             name="artist"
             placeholder="Artist Name"
             required
           />
           <SearchField
-            classes="border-slate-300 rounded-xl p-4 border-2 w-full text-2xl text-black"
+            classes="rounded-xl p-4 w-full text-2xl text-black"
             name="song"
             placeholder="Song Title"
             required
           />
           <input
-            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded cursor-pointer"
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded-xl cursor-pointer"
             type="submit"
             value={isLoading ? "SEARCHING..." : "SEARCH"}
             disabled={isLoading}
@@ -51,8 +61,13 @@ function App() {
       </nav>
       <main>
         <section className="w-full mx-auto text-center py-10 flex flex-col gap-1 text-xl">
+          <div className="mx-auto mt-12 text-white">
+            {isLoading && <Loading />}
+          </div>
           {lyricData.lyrics && formatLyrics(lyricData.lyrics)}
-          {lyricData.error}
+          {lyricData.error && (
+            <span className="text-4xl">{lyricData.error} ☹️</span>
+          )}
         </section>
       </main>
     </div>
