@@ -70,7 +70,7 @@ function App() {
             <span className="text-4xl">{lyricData.error} ☹️</span>
           )}
         </section>
-        <InterpretLyrics />
+        <InterpretLyrics lyrics={lyricData.lyrics} />
       </main>
     </div>
   );
