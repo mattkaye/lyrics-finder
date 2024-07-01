@@ -50,7 +50,7 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
         center
       >
         {!interpretation && <h1 className="text-3xl">Thinking... 🤔</h1>}
-        {interpretation && interpretation}
+        {interpretation && cleanLyrics}
       </Modal>
     </aside>
   );
