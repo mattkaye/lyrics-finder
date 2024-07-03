@@ -2,17 +2,18 @@ import { useState } from "react";
 import { cn } from "../../utils/cn";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import { formatLyrics } from "../../lib/FormatLyrics";
 
 import "./styles.css";
 
 export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
   const [open, setOpen] = useState(false);
-  const [interpretation, setInterpretation] = useState(false);
+  const [interpretation, setInterpretation] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
   const onCloseModal = () => {
     setOpenModal(false);
-    setInterpretation(false);
+    setInterpretation("");
   };
 
   const toggleMagicBox = () => {
@@ -21,15 +22,16 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
 
   const handleInterpretLyricsCall = async () => {
     setOpenModal(true);
-    const response = await fetch("https://fakeresponder.com/?sleep=2000");
-
+    const response = await fetch(
+      import.meta.env.VITE_INTERPRET_LYRICS_ENDPOINT,
+      {
+        method: "POST",
+        body: JSON.stringify({ lyrics }),
+      }
+    );
     const data = await response.json();
-    setInterpretation(data.about);
-    console.log(data);
+    setInterpretation(data.message);
   };
-
-  // Remove the line breaks
-  const cleanLyrics = lyrics.replaceAll("\n", " ");
 
   return (
     <aside className={cn("magic-ball-wrapper", open ? "active" : "")}>
@@ -50,7 +52,7 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
         center
       >
         {!interpretation && <h1 className="text-3xl">Thinking... 🤔</h1>}
-        {interpretation && cleanLyrics}
+        {interpretation && formatLyrics(interpretation)}
       </Modal>
     </aside>
   );
