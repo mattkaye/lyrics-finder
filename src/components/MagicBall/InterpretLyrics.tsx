@@ -3,6 +3,7 @@ import { cn } from "../../utils/cn";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { formatLyrics } from "../../lib/FormatLyrics";
+import { FlipWords } from "../ui/FlipWords";
 
 import "./styles.css";
 
@@ -10,6 +11,12 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
   const [open, setOpen] = useState(false);
   const [interpretation, setInterpretation] = useState("");
   const [openModal, setOpenModal] = useState(false);
+  const words = [
+    "Thinking...",
+    "Considering...",
+    "Analyzing...",
+    "Pondering...",
+  ];
 
   const onCloseModal = () => {
     setOpenModal(false);
@@ -43,15 +50,21 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
       <button className="interpret" onClick={handleInterpretLyricsCall}>
         Interpret Lyrics
       </button>
+
       <Modal
         classNames={{
-          modal: "p-20 text-black",
+          modal: "p-20 min-w-[320px] overflow-x-hidden text-black",
         }}
         open={openModal}
         onClose={onCloseModal}
         center
       >
-        {!interpretation && <h1 className="text-3xl">Thinking... 🤔</h1>}
+        {!interpretation && (
+          <h1 className="text-3xl">
+            <FlipWords words={words} duration={1000} />
+            🤔
+          </h1>
+        )}
         {interpretation && formatLyrics(interpretation)}
       </Modal>
     </aside>
