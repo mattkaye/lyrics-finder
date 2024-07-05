@@ -29,7 +29,6 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
 
   const handleInterpretLyricsCall = async () => {
     setOpenModal(true);
-    return;
     const response = await fetch(
       import.meta.env.VITE_INTERPRET_LYRICS_ENDPOINT,
       {
