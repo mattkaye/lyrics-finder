@@ -42,7 +42,7 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
 
   return (
     <aside className={cn("magic-ball-wrapper", open ? "active" : "")}>
-      <div className="absolute -left-8 w-16 h-16 rounded-xl flex items-center bg-blue-500 text-5xl cursor-pointer ">
+      <div className="absolute -left-8 w-16 h-16 rounded-xl flex items-center bg-blue-500 text-5xl cursor-pointer">
         <button onClick={toggleMagicBox} aria-label="Interpret Lyrics">
           🔮
         </button>
@@ -54,7 +54,7 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
       <Modal
         classNames={{
           modal: "p-4 py-14 md:p-20 min-w-[320px] overflow-x-hidden text-black",
-          overlay: "customOverlay",
+          overlay: "backdrop-blur-sm bg-black/70",
         }}
         open={openModal}
         onClose={onCloseModal}
