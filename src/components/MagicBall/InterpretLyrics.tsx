@@ -53,14 +53,15 @@ export const InterpretLyrics = ({ lyrics }: { lyrics: string }) => {
 
       <Modal
         classNames={{
-          modal: "p-20 min-w-[320px] overflow-x-hidden text-black",
+          modal: "p-4 py-14 md:p-20 min-w-[320px] overflow-x-hidden text-black",
+          overlay: "customOverlay",
         }}
         open={openModal}
         onClose={onCloseModal}
         center
       >
         {!interpretation && (
-          <h1 className="text-3xl">
+          <h1 className="text-3xl text-center">
             <FlipWords words={words} duration={1000} />
             🤔
           </h1>

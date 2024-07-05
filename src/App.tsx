@@ -38,7 +38,7 @@ function App() {
         <form
           ref={form}
           onSubmit={handleSubmit}
-          className="flex w-full mx-auto gap-6"
+          className="flex w-full flex-wrap md:flex-nowrap mx-auto gap-6"
         >
           <SearchField
             classes="rounded-xl p-4 w-full text-2xl text-black"
@@ -53,9 +53,9 @@ function App() {
             required
           />
           <input
-            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded-xl cursor-pointer"
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold md:py-2 md:px-4 py-5 text-xl border-b-4 border-blue-700 hover:border-blue-500 rounded-xl cursor-pointer w-full md:w-auto"
             type="submit"
-            value={isLoading ? "SEARCHING..." : "SEARCH"}
+            value={isLoading ? "SEARCHING..." : "GO!"}
             disabled={isLoading}
           />
         </form>
