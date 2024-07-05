@@ -16,7 +16,6 @@
 }
 
 @keyframes pulse {
-  0%,
   100% {
     text-shadow: none;
   }
