@@ -36,7 +36,6 @@ export const handler = async (event) => {
 
   try {
     const response = result.response;
-    console.log(response);
     const interpretation = response.text();
     return {
       statusCode: 200,
